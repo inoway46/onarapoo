@@ -1,16 +1,26 @@
 <p>オラをクリックしてみるんだゾ</p>
 <%= image_tag 'oketu.jpeg', class: "beeper" %>
+<%= image_tag 'oketu.jpeg', class: "beeper" %>
 
 <script>
 const audio1 = new Audio('<%= asset_path "audio1.mp3" %>');
 const audio2 = new Audio('<%= asset_path "audio2.mp3" %>');
 var audios = new Array(audio1, audio2);
+var types = [];
 
 document.addEventListener('click', (event)=>{
   let el = event.target;
   if (el.matches('.beeper')) {
     var x = Math.floor(Math.random()*2);
     audios[x].play();
+    types.push(x);
+    console.log(types);
+    if (types.length == 3) {
+      types.shift();
+    }
+    if (types[0] == types[1]) {
+      el.style.display = "none";
+    }
   }
 });
 </script>
