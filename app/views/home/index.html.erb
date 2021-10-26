@@ -1,26 +1,52 @@
-<p>オラをクリックしてみるんだゾ</p>
-<%= image_tag 'oketu.jpeg', class: "beeper" %>
-<%= image_tag 'oketu.jpeg', class: "beeper" %>
+<p>猫をクリックしておならを鳴らす　※音量注意</p>
+<%= image_tag 'cathip.jpeg', class: "beeper1" %>
+<%= image_tag 'cathip.jpeg', class: "beeper2" %>
+<%= image_tag 'cathip.jpeg', class: "beeper1" %>
+<%= image_tag 'cathip.jpeg', class: "beeper2" %>
+
+<%# <style>
+  img {
+    pointer-events: ;
+  }
+</style> %>
+
+<%# コメント: 1度クリックするとクリックできなくなるため、デッドロック状態になる（現状）
+types.pushを連続でできなくすればいいかも？
+コード数を多くしてもいいなら、classを1-1,1-2みたいに分ければ実装可能%>
 
 <script>
 const audio1 = new Audio('<%= asset_path "audio1.mp3" %>');
 const audio2 = new Audio('<%= asset_path "audio2.mp3" %>');
-var audios = new Array(audio1, audio2);
+//var audios = new Array(audio1, audio2);
 var types = [];
+// var b1s = document.getElementsByClassName("beeper1");
+// var b2s = document.getElementsByClassName("beeper2");
 
 document.addEventListener('click', (event)=>{
   let el = event.target;
-  if (el.matches('.beeper')) {
-    var x = Math.floor(Math.random()*2);
-    audios[x].play();
-    types.push(x);
+  if (el.matches('.beeper1')) {
+    audio1.play();
+    types.push(1);
     console.log(types);
-    if (types.length == 3) {
+    $(el).css({ 'pointer-events' : 'none' });
+  }
+  if (el.matches('.beeper2')) {
+    audio2.play();
+    types.push(2);
+    console.log(types);
+    $(el).css({ 'pointer-events' : 'none' });
+  }
+  if (types.length == 3) {
       types.shift();
+  }
+  if (types[0] == types[1]) {
+    if (types[0] == 1) {
+      $('.beeper1').remove();
     }
-    if (types[0] == types[1]) {
-      el.style.display = "none";
+    if (types[0] == 2) {
+      $('.beeper2').remove();
     }
   }
 });
+//var x = Math.floor(Math.random()*2);
 </script>
