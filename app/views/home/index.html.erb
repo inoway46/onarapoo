@@ -2,11 +2,15 @@
 <%= image_tag 'oketu.jpeg', class: "beeper" %>
 
 <script>
-const audio = new Audio('<%= asset_path "sample.mp3" %>');
+const audio1 = new Audio('<%= asset_path "audio1.mp3" %>');
+const audio2 = new Audio('<%= asset_path "audio2.mp3" %>');
+var audios = new Array(audio1, audio2);
+
 document.addEventListener('click', (event)=>{
   let el = event.target;
   if (el.matches('.beeper')) {
-    audio.play();
+    var x = Math.floor(Math.random()*2);
+    audios[x].play();
   }
 });
 </script>
