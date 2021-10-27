@@ -6,24 +6,13 @@
   <% end %>
 <% end %>
 
-<%# <style>
-  img {
-    pointer-events: ;
-  }
-</style> %>
-
-<%# コメント: 1度クリックするとクリックできなくなるため、デッドロック状態になる（現状）
-types.pushを連続でできなくすればいいかも？
-コード数を多くしてもいいなら、classを1-1,1-2みたいに分ければ実装可能%>
-
 <script>
 const audio1 = new Audio('<%= asset_path "audio1.mp3" %>');
 const audio2 = new Audio('<%= asset_path "audio2.mp3" %>');
 const audio3 = new Audio('<%= asset_path "audio3.mp3" %>');
-//var audios = new Array(audio1, audio2);
+const audio4 = new Audio('<%= asset_path "audio4.mp3" %>');
+const audio5 = new Audio('<%= asset_path "audio5.mp3" %>');
 var types = [];
-// var b1s = document.getElementsByClassName("beeper1");
-// var b2s = document.getElementsByClassName("beeper2");
 
 document.addEventListener('click', (event)=>{
   let el = event.target;
@@ -48,6 +37,20 @@ document.addEventListener('click', (event)=>{
     $("[class^='beeper']").css({ 'pointer-events' : 'auto' });
     $(el).css({ 'pointer-events' : 'none' });
   }
+  if (el.matches('.beeper4')) {
+    audio4.play();
+    types.push(4);
+    console.log(types);
+    $("[class^='beeper']").css({ 'pointer-events' : 'auto' });
+    $(el).css({ 'pointer-events' : 'none' });
+  }
+  if (el.matches('.beeper5')) {
+    audio5.play();
+    types.push(5);
+    console.log(types);
+    $("[class^='beeper']").css({ 'pointer-events' : 'auto' });
+    $(el).css({ 'pointer-events' : 'none' });
+  }
   if (types.length == 3) {
       types.shift();
   }
@@ -61,7 +64,12 @@ document.addEventListener('click', (event)=>{
     if (types[0] == 3) {
       $('.beeper3').remove();
     }
+    if (types[0] == 4) {
+      $('.beeper4').remove();
+    }
+    if (types[0] == 5) {
+      $('.beeper5').remove();
+    }
   }
 });
-//var x = Math.floor(Math.random()*2);
 </script>
