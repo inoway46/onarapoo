@@ -2,9 +2,44 @@
 <p>猫をクリックすると音が鳴ります。同じ音を連続して選ぶと消えます。　※音量注意</p>
 <% 2.times do %>
   <% (1..5).each do |i| %>
-    <%= image_tag 'cathip.jpeg', class: "beeper#{i}" %>
+    <%= image_tag 'cathip.jpeg', class: "beeper#{i}", width: "100", height: "100" %>
   <% end %>
 <% end %>
+<div class="modal js-modal">
+  <div class="modal__bg js-modal-close"></div>
+  <div class="modal__content">
+    <p>クリアしました！</p><br>
+    <%= image_tag 'cat.png', width: "40%", height: "40%" %><br>
+    <a class="replay" href="">もう1度プレイする</a><br><br>
+    <a class="js-modal-close" href="">閉じる</a>
+  </div>
+</div>
+
+<style>
+.modal{
+    display: none;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.modal__bg{
+    background: rgba(0,0,0,0.8);
+    height: 100vh;
+    position: absolute;
+    width: 100%;
+}
+.modal__content{
+    text-align: center;
+    background: #fff;
+    left: 50%;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 60%;
+}
+</style>
 
 <script>
 const audio1 = new Audio('<%= asset_path "audio1.mp3" %>');
@@ -13,6 +48,7 @@ const audio3 = new Audio('<%= asset_path "audio3.mp3" %>');
 const audio4 = new Audio('<%= asset_path "audio4.mp3" %>');
 const audio5 = new Audio('<%= asset_path "audio5.mp3" %>');
 var types = [];
+var score = 5;
 
 document.addEventListener('click', (event)=>{
   let el = event.target;
@@ -56,20 +92,52 @@ document.addEventListener('click', (event)=>{
   }
   if (types[0] == types[1]) {
     if (types[0] == 1) {
-      $('.beeper1').remove();
+      $('.beeper1').fadeOut(500, function() {
+        $(this).remove();
+      });
+      score -= 1;
+      console.log(score);
     }
     if (types[0] == 2) {
-      $('.beeper2').remove();
+      $('.beeper2').fadeOut(500, function() {
+        $(this).remove();
+      });
+      score -= 1;
+      console.log(score);
     }
     if (types[0] == 3) {
-      $('.beeper3').remove();
+      $('.beeper3').fadeOut(500, function() {
+        $(this).remove();
+      });
+      score -= 1;
+      console.log(score);
     }
     if (types[0] == 4) {
-      $('.beeper4').remove();
+      $('.beeper4').fadeOut(500, function() {
+        $(this).remove();
+      });
+      score -= 1;
+      console.log(score);
     }
     if (types[0] == 5) {
-      $('.beeper5').remove();
+      $('.beeper5').fadeOut(500, function() {
+        $(this).remove();
+      });
+      score -= 1;
+      console.log(score);
     }
   }
+  if (score == 0) {
+  $('.js-modal').fadeIn();
+  }
+});
+
+$('.js-modal-close').on('click',function(){
+  $('.js-modal').fadeOut();
+  return false;
+});
+
+$('.replay').on('click', function(){
+  location.reload();
 });
 </script>
