@@ -1,7 +1,8 @@
-<p></p>
-<h3>おなら神経衰弱（β版）</h3>
-<p>猫をクリックすると音が鳴ります。<br>同じ音を連続して選ぶと猫が消えます。<br>猫が全て消えたらクリアです。</p>
-<p>※大音量だと恥ずかしい思いするので注意してね</p>
+<div class="container"> 
+  <h3>おなら神経衰弱（β版）</h3>
+  <p>猫をクリックすると音が鳴ります。<br>同じ音を連続して選ぶと猫が消えます。<br>猫が全て消えたらクリアです。</p>
+  <p>※大音量だと恥ずかしい思いするので注意してね</p>
+</div>
 <% 2.times do %>
   <% (1..5).each do |i| %>
     <%= image_tag 'cathip.jpeg', class: "beeper#{i}", width: "100", height: "100" %>
@@ -18,6 +19,10 @@
 </div>
 
 <style>
+.container{
+    padding-top: 15px;
+}
+
 .modal{
     display: none;
     height: 100vh;
